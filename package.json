@@ -1,0 +1,48 @@
+{
+  "name": "@stormgle/react-user",
+  "version": "1.0.0",
+  "description": "React client utilities to manage logged user.",
+  "main": "dist/exporter.js",
+  "scripts": {
+    "start:web": "webpack-dev-server --content-base demo/web/ --port 3000",
+    "start:server": "node demo/server",
+    "start:dev": "concurrently \"npm run start:web\" \"npm run start:server\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stormgle/react-user.git"
+  },
+  "keywords": [
+    "react",
+    "authentication"
+  ],
+  "author": "duongtdn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stormgle/react-user/issues"
+  },
+  "homepage": "https://github.com/stormgle/react-user#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
+    "cors": "^2.8.4",
+    "css-loader": "^0.28.9",
+    "express": "^4.16.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@stormgle/auth-client": "^1.0.0"
+  }
+}
