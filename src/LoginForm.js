@@ -61,7 +61,11 @@ class LoginForm extends Component {
       { username : email },
       {
         onSuccess: (data) => { 
-          this.setState({ flow: 'password', syncing: false, alert: false });
+          if (data) {
+            this.setState({ flow: 'password', syncing: false, alert: false })
+          } else {
+            this.setState({ flow: 'email', syncing: false, alert: false })
+          }
           clearTimeout(to);
         },
         onFailure: (err) => { 
