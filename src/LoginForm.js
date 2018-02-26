@@ -111,8 +111,8 @@ class LoginForm extends Component {
           this.props.close && this.props.close();
         },
         onFailure: (err) => { 
-          if (isNaN(err)) {
-            const message = JSON.parse(err).error;
+          if (err === 'Unauthorized') {
+            const message = 'Incorrect password';
             this.setState({message, syncing: false, alert: false }) 
           } else {
             this.setState({syncing: false, alert: false, flow: 'failure' })
