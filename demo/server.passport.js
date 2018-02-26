@@ -57,7 +57,6 @@ app.post('/login',
     next();
   },
   function serializeUser(req, res, next) {
-    console.log(req.user)
     req.user.password = null;
     next();
   },
