@@ -45,6 +45,6 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@stormgle/auth-client": "^1.0.0"
+    "@stormgle/auth-client": "^1.2.0"
   }
 }
