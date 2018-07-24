@@ -19,6 +19,12 @@ export default class extends Component {
 
   }
 
+  componentWillReceiveProps(props) {
+    if (props.route) {
+      this.setState({route: props.route})
+    }
+  }
+
   render() {
     if (this.props.show) {
       if (this.state.route === 'login') {
