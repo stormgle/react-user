@@ -26,7 +26,8 @@ class LoginEmail extends Component {
           <BackButton onClick = {this.props.goBack} />
 
           <div className ="w3-text-red" >
-            This email does not registered. 
+            <b> We cannot find this email in our system </b>. <br />
+            It may be because the email is not registed or theree is a connection problem. 
           </div>
 
           <hr />

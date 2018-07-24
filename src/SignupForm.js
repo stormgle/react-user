@@ -99,7 +99,7 @@ class SignupForm extends Component {
         }
       }, 10000)
 
-      checkUserExist('/api/user',
+      checkUserExist(this.props.api.check,
         { username : email },
         {
           onSuccess: (data) => { 
@@ -162,7 +162,7 @@ class SignupForm extends Component {
       }
     }, 10000)
     
-    signup('/api/signup',
+    signup(this.props.api.signup,
       { username, password},
       {
         onSuccess: (data) => { 

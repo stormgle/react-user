@@ -24,12 +24,14 @@ export default class extends Component {
       if (this.state.route === 'login') {
         return (
           <LoginFrom  openSignupForm = {this.openSignupForm} 
+                      api = {this.props.api}
                       close = {this.props.close} 
           />
         )
       } else {
         return (
           <SignupForm openLoginForm = {this.openLoginForm} 
+                      api = {this.props.api}
                       email = {this.state.email} 
                       close = {this.props.close} 
           />
