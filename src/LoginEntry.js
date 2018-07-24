@@ -32,11 +32,11 @@ class LoginEntry extends Component {
           <label className = "w3-text-grey" > Login with social accounts </label>
 
           <div className = "loginform-oauth">
-            <button className = "w3-button w3-circle w3-ripple w3-metro-dark-blue loginform-btn-large" >  
+            <button className = "w3-button w3-circle w3-ripple w3-text-indigo loginform-btn-large" >  
               <i className ="fa fa-facebook w3-large" /> 
             </button>
             &nbsp; 
-            <button className = "w3-button w3-circle w3-ripple w3-red loginform-btn-large" >  
+            <button className = "w3-button w3-circle w3-ripple w3-text-red loginform-btn-large" >  
               <i className ="fa fa-google w3-large" /> 
             </button>
           </div>
