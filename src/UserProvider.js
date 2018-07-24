@@ -13,9 +13,15 @@ class UserProvider extends Component {
   }
 
   componentWillMount() {
+    // escape server side
+    if (typeof window === 'undefined') {
+      return
+    }
+
     auth.onStateChange( (state, user) => {
       this.setState({ user });
     });
+    
   }
 
   render() {
