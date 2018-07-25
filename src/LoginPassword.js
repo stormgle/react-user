@@ -29,7 +29,7 @@ class LoginPassword extends Component {
   render() {
     const display = this.props.display ? 'block' : 'none';
     return (
-      <div className = "loginform-backdrop w3-animate-right" style = {{ display }} >
+      <div className = "loginform-backdrop" style = {{ display }} >
         <span className ="w3-button w3-red w3-display-topright" onClick = {this.props.close}>X</span>
 
         <div className = "loginform-panel w3-container" >
