@@ -15,6 +15,9 @@ class UserProvider extends Component {
   componentWillMount() {
     // escape server side
     if (typeof window === 'undefined') {
+      if (this.props.user) {
+        this.setState({ user: this.props.user });
+      }
       return
     }
 

@@ -10,7 +10,7 @@ export function bindUserProvider( component ) {
     }
     render() {
       return (
-        <UserProvider>
+        <UserProvider user={this.props.user}>
           { React.createElement(component, {...this.props}) }
         </UserProvider>
       )
