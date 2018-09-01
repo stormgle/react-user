@@ -63,7 +63,9 @@ class InputEmail extends Component {
                 placeholder = "your email"
                 value = {this.state.email}
                 onChange = {this.getTypedEmail}
-                onKeyUp = {this.handleKeyUp} />
+                onKeyUp = {this.handleKeyUp} 
+                disabled = {this.props.syncing} 
+          />
           {
             this.props.syncing ?
               <DisabledBtn /> :

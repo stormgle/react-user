@@ -111,8 +111,8 @@ class LoginForm extends Component {
           this.props.close && this.props.close();
         },
         onFailure: (err) => { 
-          if (err === 'Unauthorized') {
-            const message = 'Incorrect password';
+          if (err === 403) {
+            const message = 'Authentication failed.';
             this.setState({message, syncing: false, alert: false }) 
           } else {
             this.setState({syncing: false, alert: false, flow: 'failure' })
