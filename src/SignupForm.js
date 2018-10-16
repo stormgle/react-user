@@ -6,6 +6,7 @@ import { signup, checkUserExist } from '@stormgle/auth-client'
 
 import SingupEmail from './SignupEmail'
 import SignupPassword from './SignupPassword'
+import SignupUserFullName from './SignupUserFullName'
 import SignupConfirm from './SignupConfirm'
 
 import Alert from './Alert'
@@ -18,13 +19,15 @@ class SignupForm extends Component {
     this.state = { 
       flow : 'email',
       email: '',
+      password: '',
+      profile: {},
       alert: false,
       diag: {},
       syncing: false,
       message: ''
     }
 
-    this.flow = ['email', 'password', 'confirm', 'success']
+    this.flow = ['email', 'password', 'fullname', 'confirm', 'success']
 
     this.next = this.next.bind(this);
     this.signup = this.signup.bind(this);
@@ -66,6 +69,12 @@ class SignupForm extends Component {
                         email = {this.state.email}
                         close = {this.props.close}
         />
+        <SignupUserFullName   display = {this._flow('fullname')}
+                              next = {this.next}
+                              back = {this.back}
+                              email = {this.state.email}
+                              close = {this.props.close}
+        />
         <SignupConfirm display = {this._flow('confirm')}
                         signup = {this.signup}
                         back = {this.back}
@@ -80,9 +89,21 @@ class SignupForm extends Component {
     )
   }
 
-  next({email, password}) {
+  next({email, password, profile}) {
 
-    this.setState({ email, password, syncing: true, message: '' });
+    if (!email) {
+      email = this.state.email;
+    }
+
+    if (!password) {
+      password = this.state.password;
+    }
+
+    if (!profile) {
+      profile = this.state.profile;
+    }
+
+    this.setState({ email, password, profile, syncing: true, message: '' });
 
     const current = this.state.flow;
 
@@ -148,6 +169,7 @@ class SignupForm extends Component {
   signup() {
     const username = this.state.email;
     const password = this.state.password;
+    const profile = this.state.profile;
 
     this.setState({ alert: false, syncing : true });
 
@@ -163,7 +185,7 @@ class SignupForm extends Component {
     }, 10000)
     
     signup(this.props.api.signup,
-      { username, password},
+      { username, password, profile},
       {
         onSuccess: (data) => { 
           // this.setState({ flow: 'success', syncing: false, alert: false }) 

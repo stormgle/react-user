@@ -65,7 +65,7 @@ app.post('/login',
   }
 )
 
-app.post('/user', (req, res) => {
+app.post('/check/user', (req, res) => {
   setTimeout(() => {
     const username = req.body.username;
     const usr = findUser(username);
@@ -80,7 +80,12 @@ app.post('/user', (req, res) => {
 
 app.post('/signup', (req, res) => {
   setTimeout(() => {
-    const { username, password } = req.body;
+    const { username, password, profile } = req.body;
+
+    console.log(username)
+    console.log(password)
+    console.log(profile)
+
     const usr = findUser(username);
     if (usr) {
       res.status(403).json({error: 'Email is already registered'});
@@ -88,17 +93,14 @@ app.post('/signup', (req, res) => {
       USERS[username] = {
         _id: `00${gid++}`, 
         email: username,
-        password: password
+        password: password,
+        profile: profile
       }
       res.status(200).json({user: USERS[username], tokens: {foo: 'foo.token'}});
     }
   }, 2000);
 });
 
-app.post('/check/user', (req, res) => {
-  console.log('Function: /check/user')
-  res.status(200).json({ user: null });
-})
 
 const server = app.listen('3001', 'localhost', () => {
   const host = server.address().address;
