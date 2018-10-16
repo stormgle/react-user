@@ -74,7 +74,7 @@ app.post('/check/user', (req, res) => {
     } else {
       res.status(200).json({user: null});
     }
-  }, 2000);
+  }, 0);
   
 })
 
@@ -98,7 +98,7 @@ app.post('/signup', (req, res) => {
       }
       res.status(200).json({user: USERS[username], tokens: {foo: 'foo.token'}});
     }
-  }, 2000);
+  }, 0);
 });
 
 
