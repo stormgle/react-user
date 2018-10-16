@@ -14,6 +14,7 @@ class SignupUserContact extends Component {
     }
 
     this.onConfirm = this.onConfirm.bind(this);
+    this.addPhoneBox = this.addPhoneBox.bind(this);
 
   }
 
@@ -52,14 +53,18 @@ class SignupUserContact extends Component {
               {
                 this.state.phone.map((phone, index) => {
                   return (
-                    <span  key = {index}>
+                    <span  key = {index} style={{display: 'block', marginBottom: '4px'}}>
                       <input  className = "w3-input w3-border"
                               type = "text"
                               value = {phone}
                               onChange = {this.getTyped('phone', index)}
                               onKeyUp = {this.handleKeyUp('phone', index)}
                       />
-                      <label className="w3-text-blue" style={{cursor: 'pointer'}}> + Add more phone number </label>
+                      <label  className = "w3-text-blue" 
+                              style = {{cursor: 'pointer', display: (index === this.state.phone.length - 1) ? 'inline' : 'none'}} 
+                              onClick = {this.addPhoneBox} > 
+                        + Add more phone number 
+                      </label>
                     </span>
                   )
 
@@ -80,8 +85,9 @@ class SignupUserContact extends Component {
           </div>
 
           <div style = {{marginBottom: '72px'}}>
-            <button className = {`w3-button w3-right w3-blue ${this.props.syncing? 'w3-disabled' : ''}`}
-                    onClick = {this.onConfirm} > 
+            <button className = {`w3-button w3-right w3-blue ${this.state.phone.filter(phone => phone.length > 0).length === 0? 'w3-disabled' : ''}`}
+                    onClick = {this.onConfirm}
+                    disabled ={this.state.phone.filter(phone => phone.length > 0).length === 0} > 
                     Continue <i className ="fa fa-chevron-right" /> 
             </button>
           </div>
@@ -117,9 +123,15 @@ class SignupUserContact extends Component {
     }
   }
 
+  addPhoneBox() {
+    const phone = [...this.state.phone];
+    phone.push('');
+    this.setState({ phone })
+  }
+
   onConfirm() {
     const profile = {...this.props.profile}
-    profile.phone = this.state.phone
+    profile.phone = this.state.phone.filter(phone => phone.length > 0)
     profile.address = this.state.address
     this.props.next && this.props.next({profile});
   }
