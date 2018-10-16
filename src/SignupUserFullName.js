@@ -79,8 +79,9 @@ class SignupUserFullName extends Component {
           </div>
 
           <div style = {{marginBottom: '72px'}}>
-            <button className = {`w3-button w3-right w3-blue ${this.props.syncing? 'w3-disabled' : ''}`}
-                    onClick = {this.onConfirm} > 
+            <button className = {`w3-button w3-right w3-blue ${this.state.firstName.length === 0? 'w3-disabled' : ''}`}
+                    onClick = {this.onConfirm} 
+                    disabled = {this.state.firstName.length === 0} > 
                     Continue <i className ="fa fa-chevron-right" /> 
             </button>
           </div>
