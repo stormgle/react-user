@@ -95,6 +95,11 @@ app.post('/signup', (req, res) => {
   }, 2000);
 });
 
+app.post('/check/user', (req, res) => {
+  console.log('Function: /check/user')
+  res.status(200).json({ user: null });
+})
+
 const server = app.listen('3001', 'localhost', () => {
   const host = server.address().address;
   const port = server.address().port;
