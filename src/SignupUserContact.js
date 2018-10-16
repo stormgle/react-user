@@ -9,7 +9,7 @@ class SignupUserContact extends Component {
     super(props);
 
     this.state = {
-      phone: '',
+      phone: [''],
       address: '',
     }
 
@@ -37,27 +37,38 @@ class SignupUserContact extends Component {
           <BackButton onClick = {this.props.back} />
 
           <div className ="w3-text-blue" >
-            <h3> {this.props.email} </h3>
+            <h3> Hello {this.props.profile.displayName} </h3>
           </div>
 
           <hr />
 
           <div className ="w3-text-blue" >
-            Please input your name
+            Please input your contact
           </div>
 
           <div style = {{marginBottom: '24px'}}>
             <p>
-              <label>Last Name</label>
-              <input    className="w3-input w3-border"
-                        type="text"
-                        value={this.state.phone}
-                        onChange = {this.getTyped('phone')}
-                        onKeyUp = {this.handleKeyUp('phone')}
-              />
+              <label>Your Phone Number</label>
+              {
+                this.state.phone.map((phone, index) => {
+                  return (
+                    <span  key = {index}>
+                      <input  className = "w3-input w3-border"
+                              type = "text"
+                              value = {phone}
+                              onChange = {this.getTyped('phone', index)}
+                              onKeyUp = {this.handleKeyUp('phone', index)}
+                      />
+                      <label className="w3-text-blue" style={{cursor: 'pointer'}}> + Add more phone number </label>
+                    </span>
+                  )
+
+                })
+              }
             </p>
             <p>
-              <label>Middle Name</label>
+              <label>City</label>
+              
               <input    className="w3-input w3-border"
                         type="text"
                         value={this.state.address}
@@ -82,12 +93,22 @@ class SignupUserContact extends Component {
     )
   }
 
-  getTyped(target) {
-    return (evt) => {
-      const state = {}
-      state[target] = evt.target.value
-      this.setState(state)
+  getTyped(target, index) {
+    if (index !== undefined) {
+      return (evt) => {
+        const state = {}
+        state[target] = [...this.state[target]];
+        state[target][index] = evt.target.value;
+        this.setState(state)
+      }
+    } else {
+      return (evt) => {
+        const state = {}
+        state[target] = evt.target.value;
+        this.setState(state)
+      }
     }
+    
   }
 
   handleKeyUp(target) {

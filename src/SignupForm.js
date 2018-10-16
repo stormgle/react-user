@@ -7,6 +7,7 @@ import { signup, checkUserExist } from '@stormgle/auth-client'
 import SingupEmail from './SignupEmail'
 import SignupPassword from './SignupPassword'
 import SignupUserFullName from './SignupUserFullName'
+import SignupUserContact from './SignupUserContact'
 import SignupConfirm from './SignupConfirm'
 
 import Alert from './Alert'
@@ -27,7 +28,7 @@ class SignupForm extends Component {
       message: ''
     }
 
-    this.flow = ['email', 'password', 'fullname', 'confirm', 'success']
+    this.flow = ['email', 'password', 'fullname', 'contact', 'confirm', 'success']
 
     this.next = this.next.bind(this);
     this.signup = this.signup.bind(this);
@@ -73,6 +74,13 @@ class SignupForm extends Component {
                               next = {this.next}
                               back = {this.back}
                               email = {this.state.email}
+                              close = {this.props.close}
+        />
+        <SignupUserContact    display = {this._flow('contact')}
+                              next = {this.next}
+                              back = {this.back}
+                              email = {this.state.email}
+                              profile = {this.state.profile}
                               close = {this.props.close}
         />
         <SignupConfirm display = {this._flow('confirm')}
