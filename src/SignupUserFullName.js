@@ -108,12 +108,24 @@ class SignupUserFullName extends Component {
 
   onConfirm() {
     const profile = {
-      lastName: this.state.lastName,
-      middleName: this.state.middleName,
-      firstName: this.state.firstName,
-      displayName: this.state.firstName
+      lastName: this._formatName(this.state.lastName),
+      middleName: this._formatName(this.state.middleName),
+      firstName: this._formatName(this.state.firstName),
+      displayName: this._formatName(this.state.firstName)
     }
     this.props.next && this.props.next({profile});
+  }
+
+  _formatName(name) {
+    return this._toTitleCase(name.replace(/\s+/g, " ").trim());
+  }
+
+  _toTitleCase(phrase) {
+    return phrase
+            .toLowerCase()
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
   }
 
 }
