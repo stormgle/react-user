@@ -160,6 +160,7 @@ class LoginForm extends Component {
                        syncing = {this.state.syncing}
                        message = {this.state.message}
                        close = {this.props.close}
+                       api = {this.props.api}
         />
         <LoginEmail next = {this.next} 
                     display = {this._flow('email')}

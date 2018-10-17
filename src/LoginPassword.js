@@ -66,7 +66,7 @@ class LoginPassword extends Component {
           </div>
 
           <div style = {{marginTop: '8px'}} >
-            <label> Forgot your password, <a href = "#" > click here </a> </label>
+            <label> Forgot your password, <a href = {`${this.props.api.resetPassword}?email=${this.props.email}`} > click here </a> </label>
           </div>
 
         </div>

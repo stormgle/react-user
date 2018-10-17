@@ -11,9 +11,10 @@ import UserProvider from '../src/UserProvider'
 import { bindUserProvider } from '../src/utils'
 
 const _api = {
-  login: process.env.API_LOGIN || 'http://localhost:3000/api/login',
-  signup: process.env.API_SIGNUP || 'http://localhost:3000/api/signup',
-  check: process.env.API_CHECK || 'http://localhost:3000/api/check/user',
+  login: process.env.API_LOGIN || 'https://auth.expiup.com/auth/login',
+  signup: process.env.API_SIGNUP || 'https://auth.expiup.com/auth/signup',
+  check: process.env.API_CHECK || 'https://auth.expiup.com/check/user',
+  resetPassword: process.env.API_RESET_PASSWORD || 'https://auth.expiup.com/auth/request_reset_password_link',
 }
 
 class Display extends Component {
@@ -31,7 +32,7 @@ class Display extends Component {
       return(
         <div>
           <div className = "w3-bar w3-black">
-            <div className = "w3-bar-item"> {this.props.user.email} </div>
+            <div className = "w3-bar-item"> {this.props.user.profile.displayName} </div>
             <button className = "w3-bar-item w3-right w3-hover-blue w3-button"
                     onClick = {logout} > 
               Logout 
