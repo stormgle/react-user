@@ -38,6 +38,7 @@ class SignupForm extends Component {
     this.closeAlert = this.closeAlert.bind(this);
     this._flow = this._flow.bind(this);
     this._renderAlertBox = this._renderAlertBox.bind(this);
+    this.loginByToken = this.loginByToken.bind(this);
   }
 
   componentWillMount() {
@@ -96,7 +97,7 @@ class SignupForm extends Component {
                         email = {this.state.email}
                         profile = {this.state.profile}
                         close = {this.props.close}
-                        userDoLogin = {this.props.loginByToken}
+                        userDoLogin = {this.loginByToken}
         />
         <ErrorPage  display = {this._flow('failure')}
                     goBack = {() => this.back('email')}
