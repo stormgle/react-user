@@ -2,13 +2,14 @@
 
 import React, { Component } from 'react'
 
-import { signup, checkUserExist } from '@stormgle/auth-client'
+import { signup, loginByToken, checkUserExist } from '@stormgle/auth-client'
 
 import SingupEmail from './SignupEmail'
 import SignupPassword from './SignupPassword'
 import SignupUserFullName from './SignupUserFullName'
 import SignupUserContact from './SignupUserContact'
 import SignupConfirm from './SignupConfirm'
+import SignupWelcome from './SignupWelcome'
 
 import Alert from './Alert'
 import ErrorPage from './ErrorPage'
@@ -25,10 +26,11 @@ class SignupForm extends Component {
       alert: false,
       diag: {},
       syncing: false,
-      message: ''
+      message: '',
+      loginData: null
     }
 
-    this.flow = ['email', 'password', 'fullname', 'contact', 'confirm', 'success']
+    this.flow = ['email', 'password', 'fullname', 'contact', 'confirm', 'welcome']
 
     this.next = this.next.bind(this);
     this.signup = this.signup.bind(this);
@@ -83,12 +85,18 @@ class SignupForm extends Component {
                               profile = {this.state.profile}
                               close = {this.props.close}
         />
-        <SignupConfirm display = {this._flow('confirm')}
+        <SignupConfirm  display = {this._flow('confirm')}
                         signup = {this.signup}
                         back = {this.back}
                         email = {this.state.email}
                         syncing = {this.state.syncing}
                         close = {this.props.close}
+        />
+        <SignupWelcome  display = {this._flow('welcome')}
+                        email = {this.state.email}
+                        profile = {this.state.profile}
+                        close = {this.props.close}
+                        userDoLogin = {this.props.loginByToken}
         />
         <ErrorPage  display = {this._flow('failure')}
                     goBack = {() => this.back('email')}
@@ -191,14 +199,14 @@ class SignupForm extends Component {
         this.setState({ diag, alert: true, syncing: false })
       }
     }, 10000)
-    
+
     signup(this.props.api.signup,
       { username, password, profile},
       {
+        autoLoginAfterSignup: false,
         onSuccess: (data) => { 
-          // this.setState({ flow: 'success', syncing: false, alert: false }) 
+          this.setState({ loginData: data, flow: 'welcome', syncing: false, alert: false }) 
           clearTimeout(to);
-          this.props.close && this.props.close();
         },
         onFailure: (err) => { 
           this.setState({ flow: 'failure', syncing: false, alert: false })
@@ -207,6 +215,10 @@ class SignupForm extends Component {
       }
     )
 
+  }
+
+  loginByToken() {
+    loginByToken(this.state.loginData)
   }
 
   closeAlert() {
