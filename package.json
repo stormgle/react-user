@@ -1,13 +1,14 @@
 {
   "name": "@stormgle/react-user",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React client utilities to manage logged user.",
   "main": "dist/exporter.js",
   "scripts": {
-    "build": "babel src --out-dir dist",
+    "build": "rm -rf dist/ && babel src --out-dir dist",
     "start:web": "webpack-dev-server --content-base demo/web/ --port 3000 --host 0.0.0.0 --watch-poll",
     "start:server": "node demo/server.passport.js",
-    "start:dev": "concurrently \"npm run start:web\" \"npm run start:server\" "
+    "start:dev": "concurrently \"npm run start:web\" \"npm run start:server\" ",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
