@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 import BackButton from './BackButton'
 
-class SignupUserFullName extends Component {
+class SignupUserProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -12,6 +12,7 @@ class SignupUserFullName extends Component {
       lastName: '',
       middleName: '',
       firstName: '',
+      gender: '',
     }
 
     this.onConfirm = this.onConfirm.bind(this);
@@ -44,7 +45,7 @@ class SignupUserFullName extends Component {
           <hr />
 
           <div className ="w3-text-blue" >
-            Please input your name
+            Please input your name & gender
           </div>
 
           <div style = {{marginBottom: '24px'}}>
@@ -74,6 +75,24 @@ class SignupUserFullName extends Component {
                         onChange = {this.getTyped('firstName')}
                         onKeyUp = {this.handleKeyUp('firstName')}
               />
+            </p>
+            <p>
+              <label>Gender</label> <br />
+              <span style={{marginRight: '32px'}}>
+                <input  className="w3-radio" type="radio" name="gender" value="male" 
+                        checked = {this.state.gender === 'male'}
+                        onChange = { () => this.setState({gender: 'male'}) }
+                />
+                <label>Male</label>
+              </span>
+              <span>
+                <input  className="w3-radio" type="radio" name="gender" value="female" 
+                        checked = {this.state.gender === 'female'}
+                        onChange = { () => this.setState({gender: 'female'}) }
+                />
+                <label>FeMale</label>
+              </span>
+              
             </p>
             
           </div>
@@ -112,7 +131,8 @@ class SignupUserFullName extends Component {
       lastName: this._formatName(this.state.lastName),
       middleName: this._formatName(this.state.middleName),
       firstName: this._formatName(this.state.firstName),
-      displayName: this._formatName(this.state.firstName)
+      displayName: this._formatName(this.state.firstName),
+      gender: this.state.gender
     }
     this.props.next && this.props.next({profile});
   }
@@ -131,4 +151,4 @@ class SignupUserFullName extends Component {
 
 }
 
-export default SignupUserFullName
+export default SignupUserProfile
