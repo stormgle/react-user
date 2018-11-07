@@ -220,6 +220,7 @@ class SignupForm extends Component {
 
   loginByToken() {
     loginByToken(this.state.loginData)
+    this.props.close()
   }
 
   closeAlert() {
